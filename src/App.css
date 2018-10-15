@@ -86,6 +86,111 @@ html {
   text-align: center;
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+  position: fixed;
+  background: white;
+  width: 30%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  background-color: #30343F;
+}
+
+.modal-button-container {
+  position: relative;
+  width: 50%;
+  height: 96px;
+  display: inline-flex;
+
+}
+
+.modal-button {
+  display: inline-block;
+  padding-top: 1em;
+  right: 0;
+  padding-bottom: 1em;
+  position: relative;
+  width: 8em;
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin-bottom: .5em;
+  margin: auto;
+}
+
+.modal-button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid gray;
+}
+
+.modal-input-container {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 6em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-input {
+  display: inline-block;
+  position: relative;
+  top: 2em;
+  left: 2.5em;
+  padding: .5em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 18px;
+  margin: auto;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.new-chatroom-button-container {
+  position: relative;
+  width: 100%;
+}
+
+.new-chatroom-button {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  position: relative;
+  width: 65%;
+  height: 75%;
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.new-chatroom-button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid gray;
+}
+
+
 .send-button-text {
   width: 100%;
   height: 100%;

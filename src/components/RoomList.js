@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+import Modal from './Modal.js';
 
 
 class RoomList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rooms: []
+      rooms: [],
+      show: "display-none",
+      newRoom: "",
+      test: "test",
     };
     this.roomsRef = this.props.firebase.database().ref('Rooms');
+
+    this.showModal = () => {
+      this.setState({ show: "display-block" });
+    };
+
+    this.hideModal = () => {
+      this.setState({ show: "display-none" });
+    };
   }
 
   componentDidMount() {
@@ -18,11 +30,31 @@ class RoomList extends Component {
     })
   }
 
+  handleRoomAddClick() {
+    this.roomsRef.push({
+      name: this.state.newRoom
+    });
+    this.setState({ newRoom: "" });
+    this.hideModal();
+  }
+
+  handleRoomOnChange(e) {
+    const newRoom = e.target.value;
+    this.setState({ newRoom: newRoom });
+  }
+
+
   render() {
     return (
       <div className="nav-side-bar">
         <div className="logo">
           <h1>BlocChat</h1>
+        </div>
+        <Modal show={this.state.show} handleClose={this.hideModal} onRoomChange={(e) => this.handleRoomOnChange(e)} handleRoomAddClick={() => this.handleRoomAddClick()} newRoom={this.state.newRoom} />
+          <div className="new-chatroom-button-container">
+          <div className="new-chatroom-button" onClick={this.showModal}>
+            Add new room
+          </div>
         </div>
         <ul className="room-ul">
           {
