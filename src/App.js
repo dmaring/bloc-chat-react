@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import './App.css';
-import Chatroom from './components/Chatroom.js';
+import MessageList from './components/MessageList.js';
 import RoomList from './components/RoomList.js';
 
 // Firebase config
@@ -18,6 +18,28 @@ messagingSenderId: "853809125214"
 firebase.initializeApp(config);
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeRoom: {
+        name: "",
+        key: "1"
+      }
+    }
+
+
+  };
+
+  handleSetRoom(e) {
+    this.setState({
+      activeRoom: {
+        name: e.target.innerHTML,
+        key: String(e.target.dataset.key)
+      },
+    });
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -26,7 +48,12 @@ class App extends Component {
         </header>
         <main>
           <div className="view-container">
-            <RoomList firebase={firebase}/>
+            <RoomList
+              firebase={firebase}
+              handleSetRoom={(e) => this.handleSetRoom(e)} activeRoom={this.state.activeRoom}/>
+            <MessageList
+              firebase={firebase}
+              activeRoom={this.state.activeRoom} />
           </div>
         </main>
       </div>

@@ -9,8 +9,8 @@ class RoomList extends Component {
       rooms: [],
       show: "display-none",
       newRoom: "",
-      test: "test",
     };
+
     this.roomsRef = this.props.firebase.database().ref('Rooms');
 
     this.showModal = () => {
@@ -23,12 +23,16 @@ class RoomList extends Component {
   }
 
   componentDidMount() {
+    // listener that triggers callback every time new room is added
     this.roomsRef.on('child_added', snapshot => {
       const room = snapshot.val();
       room.key = snapshot.key;
+      // console.log(room);
       this.setState({ rooms: this.state.rooms.concat( room ) });
     })
   }
+
+
 
   handleRoomAddClick() {
     this.roomsRef.push({
@@ -43,6 +47,14 @@ class RoomList extends Component {
     this.setState({ newRoom: newRoom });
   }
 
+  isActiveRoom(room) {
+    if (room.key === this.props.activeRoom.key) {
+      // console.log(room.key, this.props.activeRoom.key);
+      return ("room-name-text-active");
+      } else {
+      return ("room-name-text");
+    }
+  }
 
   render() {
     return (
@@ -51,7 +63,7 @@ class RoomList extends Component {
           <h1>BlocChat</h1>
         </div>
         <Modal show={this.state.show} handleClose={this.hideModal} onRoomChange={(e) => this.handleRoomOnChange(e)} handleRoomAddClick={() => this.handleRoomAddClick()} newRoom={this.state.newRoom} />
-          <div className="new-chatroom-button-container">
+        <div className="new-chatroom-button-container">
           <div className="new-chatroom-button" onClick={this.showModal}>
             Add new room
           </div>
@@ -59,9 +71,9 @@ class RoomList extends Component {
         <ul className="room-ul">
           {
             this.state.rooms.map((room) =>
-              <li className="room-name-text" key={room.key}>
+              <li data-key={room.key} className={this.isActiveRoom(room)}  key={room.key} onClick={this.props.handleSetRoom}>
                 {room.name}
-              </li>
+                </li>
             )
           }
         </ul>

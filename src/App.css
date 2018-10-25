@@ -16,35 +16,39 @@ html {
 
 .view-container {
   position: relative;
-  width: 1024px;
-  height: 1152px;
+  width: 1040px;
+  height: 100vh;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
+  margin-top: 0;
   border: 1px solid black;
-  border-color: black;
-  border-radius: 15px;
+  border-color: #2980b9;
+  border-radius: 5px;
   overflow: hidden;
 }
 
 .nav-side-bar {
-  position: absolute;
+  float: left;
   width: 250px;
   height: 100%;
-  background-color: #30343F;
+  background-color: #2980b9;
 }
 
 .chat-container {
-  position: absolute;
-  width: 774px;
+  position: relative;
   height: 100%;
-  margin-left: 250px;
-  padding-right: 2px;
   overflow-y: scroll;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
 .chatline {
-  position: relative;
+  top: 0;
   width: auto;
   height: auto;
   background-color: rgb(219, 219, 219);
@@ -52,13 +56,14 @@ html {
 }
 
 .chatline.odd {
-    background-color: white;
+    background-color: #afd5ed;
 }
 
 .chat-input-container {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  
+  width: 790px;
   height: 4em;
 }
 
@@ -76,6 +81,7 @@ html {
   font-size: 18px;
 
 }
+
 
 .chat-input-submit {
   border-top: 1px solid gray;
@@ -104,7 +110,7 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  background-color: #30343F;
+  background-color: #2980b9;
 }
 
 .modal-button-container {
@@ -131,9 +137,9 @@ html {
 }
 
 .modal-button:hover {
-  background-color: white;
+  background-color: #16a085;
   color: black;
-  border: 2px solid gray;
+  border: 2px solid black;
 }
 
 .modal-input-container {
@@ -182,12 +188,13 @@ html {
   text-align: center;
   border: 2px solid white;
   border-radius: 10px;
+  background-color: #16a085;
 }
 
 .new-chatroom-button:hover {
-  background-color: white;
+  background-color: #16a085;
   color: black;
-  border: 2px solid gray;
+  border: 2px solid black;
 }
 
 
@@ -207,4 +214,12 @@ html {
   color: white;
   text-align: center;
   margin: 1em;
+  cursor: pointer;
+}
+
+.room-name-text-active {
+  color: #34495e;
+  text-align: center;
+  margin: 1em;
+  cursor: pointer;
 }
