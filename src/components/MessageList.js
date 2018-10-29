@@ -6,9 +6,8 @@ class MessageList extends Component {
     this.state = {
       activeMessages: []
     }
-
     this.messagesRef = this.props.firebase.database().ref('Messages');
-    }
+  }
 
   componentWillMount() {
       this.setState({
@@ -26,7 +25,7 @@ class MessageList extends Component {
           key: snapshot.key
           };
 
-      console.log(message);
+      // console.log(message);
       this.setState({ activeMessages: this.state.activeMessages.concat( message ) });
       })
   }
@@ -42,7 +41,7 @@ class MessageList extends Component {
           key: snapshot.key
           };
       temp.push(message);
-      console.log(message);
+      // console.log(message);
       this.setState({ activeMessages: temp });
     })
 
@@ -53,11 +52,8 @@ class MessageList extends Component {
   render() {
     const activeRoom = this.props.activeRoom.key;
 
-    let result = this.state.activeMessages.map((message, index) => {
-      console.log(activeRoom + " active room from messages");
-      console.log(message.roomId + " message room id from messages");
-
-      if (message.roomId == activeRoom) {
+    let result = this.state.activeMessages.map((message) => {
+      if (message.roomId === activeRoom) {
         return <li key={message.key}>
           <div className='chatline'>
             {message.sender} <br></br>

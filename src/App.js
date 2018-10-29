@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import './App.css';
 import MessageList from './components/MessageList.js';
 import RoomList from './components/RoomList.js';
+import User from './components/User.js';
 
 // Firebase config
 const config = {apiKey: "AIzaSyDj-uohZGkixW8r4j9jjbsYZo7q9nTE8aQ",
@@ -17,17 +18,17 @@ messagingSenderId: "853809125214"
 // Initialize Firebase
 firebase.initializeApp(config);
 
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeRoom: {
         name: "",
-        key: "1"
+        key: ""
+      },
+      activeUser: ""
       }
-    }
-
-
   };
 
   handleSetRoom(e) {
@@ -35,8 +36,14 @@ class App extends Component {
       activeRoom: {
         name: e.target.innerHTML,
         key: String(e.target.dataset.key)
-      },
+      }
     });
+  }
+
+  handleSetUser(user) {
+    this.setState({
+      activeUser: user
+    })
   }
 
 
@@ -47,13 +54,20 @@ class App extends Component {
 
         </header>
         <main>
+          <User
+            setUser={(user) => this.handleSetUser(user)}
+            firebase={firebase}
+            activeUser={this.state.activeUser}
+          />
           <div className="view-container">
             <RoomList
               firebase={firebase}
-              handleSetRoom={(e) => this.handleSetRoom(e)} activeRoom={this.state.activeRoom}/>
+              handleSetRoom={(e) => this.handleSetRoom(e)} activeRoom={this.state.activeRoom}
+            />
             <MessageList
               firebase={firebase}
               activeRoom={this.state.activeRoom} />
+
           </div>
         </main>
       </div>

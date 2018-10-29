@@ -62,7 +62,10 @@ class RoomList extends Component {
         <div className="logo">
           <h1>BlocChat</h1>
         </div>
-        <Modal show={this.state.show} handleClose={this.hideModal} onRoomChange={(e) => this.handleRoomOnChange(e)} handleRoomAddClick={() => this.handleRoomAddClick()} newRoom={this.state.newRoom} />
+        <Modal
+          show={this.state.show} 
+          handleClose={this.hideModal}
+          onRoomChange={(e) => this.handleRoomOnChange(e)} handleRoomAddClick={() => this.handleRoomAddClick()} newRoom={this.state.newRoom} />
         <div className="new-chatroom-button-container">
           <div className="new-chatroom-button" onClick={this.showModal}>
             Add new room

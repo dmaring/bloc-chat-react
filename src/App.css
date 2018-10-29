@@ -62,7 +62,7 @@ ul {
 .chat-input-container {
   position: absolute;
   bottom: 0;
-  
+
   width: 790px;
   height: 4em;
 }
@@ -111,6 +111,7 @@ ul {
   transform: translate(-50%, -50%);
   border-radius: 15px;
   background-color: #2980b9;
+  z-index: 200;
 }
 
 .modal-button-container {
