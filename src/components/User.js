@@ -26,11 +26,12 @@ class User extends Component {
 
   render(){
     return(
-      <div>
+      <div className='top-container'>
         <button onClick={this.handleSignInClick}>Sign in</button>
         <button onClick={this.handleSignOutClick}>Sign out</button>
-        <div>
-          {this.props.activeUser ? "Hello " + this.props.activeUser.displayName : "Guest"}</div>
+        <div className='user-display'>
+          <p>{this.props.activeUser ? "Hello, " + this.props.activeUser.displayName : "Hello, Guest"}</p>
+        </div>
       </div>
     )
   }
