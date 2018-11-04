@@ -37,10 +37,10 @@ html {
 .top-container {
   position: relative;
   width: 1040px;
-  height: 2.5em;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
 }
 
 .nav-side-bar {
@@ -65,6 +65,13 @@ html {
   left: 0;
   right: 0;
   bottom: 4em;
+}
+
+.messages-active-room {
+  margin: 1rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #34495e;
 }
 
 
@@ -106,9 +113,20 @@ ul {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   font-size: 18px;
-
 }
 
+.chatline:nth-child(odd) {
+  background-color: #afd5ed;
+}
+
+.chat-time {
+  float: right;
+}
+
+.chat-name {
+  font-size: 9px;
+  color: gray;
+}
 
 .chat-input-submit {
   border-top: 1px solid gray;

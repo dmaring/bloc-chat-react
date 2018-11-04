@@ -10,6 +10,10 @@ class MessageList extends Component {
     this.messagesRef = this.props.firebase.database().ref('Messages');
   }
 
+  scrollToBottom() {
+    this.el.scrollIntoView({ behavior: "smooth" });
+  }
+
   componentWillMount() {
       this.setState({
         activeMessages: []
@@ -35,6 +39,11 @@ class MessageList extends Component {
       // console.log(message);
       this.setState({ activeMessages: this.state.activeMessages.concat( message ) });
       })
+      this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   updateRoomMessages(room) {
@@ -60,6 +69,12 @@ class MessageList extends Component {
     })
   }
 
+  handleEnterKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.createNewMessage();
+    };
+  }
+
   createNewMessage() {
     const message = {
       content: this.state.newMessage,
@@ -69,6 +84,9 @@ class MessageList extends Component {
       };
     console.log(message);
     this.messagesRef.push(message);
+    this.setState({
+      newMessage: " "
+    });
     }
 
   isEven(index) {
@@ -82,14 +100,10 @@ class MessageList extends Component {
 
     let result = this.state.activeMessages.map((message, index) => {
       if (message.roomId === activeRoom) {
-        return <li key={message.key}>
-          <div className={this.isEven(index)}>
-            {message.sender} <br></br>
-            {message.content}
-            <div>
-              {message.sentAt}
-            </div>
-          </div>
+        return <li key={message.key} className='chatline'>
+          <span className='chat-name'>{message.sender}</span><br></br>
+          {message.content}
+          <div className='chat-time'>{message.sentAt}</div>
         </li>;
       }
     });
@@ -97,15 +111,19 @@ class MessageList extends Component {
     return (
         <div className="chat-container">
           <div className="messages-container">
-            <div>
+            <div className='messages-active-room'>
               {this.props.activeRoom ? this.props.activeRoom.name: " "}
             </div>
             <ul className='chatgroup-list'>
               { result }
             </ul>
+            <div ref={el => { this.el = el; }}></div>
           </div>
           <div className="chat-input-container">
-            <input className="chat-input-text" type="text" name="chat-text" onChange={(e) => this.handleMessageOnChange(e.target.value)}>
+            <input className="chat-input-text" type="text" name="chat-text"
+              value={this.state.newMessage}
+              onChange={(e) => this.handleMessageOnChange(e.target.value)}
+              onKeyPress={(e) => this.handleEnterKeyPress(e)}>
             </input>
             <div className="chat-input-submit" >
               <div onClick={() => this.createNewMessage()} className="send-button-text">
